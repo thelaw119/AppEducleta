@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+
+		function Add(nombre) {
+			var nombre = $("#nombre").val();
+				   
+					var dataString = "nombre=" + nombre;
+					if ($.trim(nombre).length > 0 ) {
+						$.ajax({
+							type: "POST",
+							url: "http://192.168.100.2/conexioneducleta/insertar.php",
+							data: dataString,
+							crossDomain: true,
+							cache: false,
+							beforeSend: function() {
+								$("#insert").val('Loading...');
+							},
+							success: function(data) {
+								if (data == "success") {
+									alert("Data Sudah Masuk");
+									$("#insert").val('submit');
+								} else if (data == "error") {
+									alert("error");
+								}
+							}
+						});
+					}
+					return false;
+		}
+		
+			</script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">       
+        
+        
+    </div>
+    <br/>
+    <br/>
+    <form>
+
+		<input type="text" id="nombre" name="nombre" value="" />
+      
+        
+    
+		<button type="submit" class="btn btn-success" href="javascript:;" onclick="Add($('#nombre').val());return false;">Agregar</button>
+	
+
+	</form>
+       
+           
+       
+</body>
+
+</html>
